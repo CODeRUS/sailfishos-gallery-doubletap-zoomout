@@ -1,0 +1,8 @@
+{
+    "name": "Gallery doubletap reset scale",
+    "description": "Patch for resetting image scale in gallery by double click.",
+    "category": "gallery",
+    "infos": {
+        "maintainer": "coderus"
+    }
+}

@@ -1,0 +1,33 @@
+commit d5d8d7edcf66400b616cdff5bd09bb2635afbc99
+Author: CODeRUS <coderusinbox@gmail.com>
+Date:   Fri Feb 20 08:35:54 2015 +0500
+
+    [v0.0.1] Reset scale by doubleclick
+
+diff --git a/usr/lib/qt5/qml/Sailfish/Gallery/ImageViewer.qml b/usr/lib/qt5/qml/Sailfish/Gallery/ImageViewer.qml
+index 1d78e01..7603df3 100644
+--- a/usr/lib/qt5/qml/Sailfish/Gallery/ImageViewer.qml
++++ b/usr/lib/qt5/qml/Sailfish/Gallery/ImageViewer.qml
+@@ -204,10 +204,20 @@ SilicaFlickable {
+ 
+         MouseArea {
+             anchors.fill: parent
+-            enabled: !flickable.scaled
+ 
+             onClicked: {
+-                flickable.clicked()
++                if (!flickable.scaled) {
++                    flickable.clicked()
++                }
++            }
++
++            onDoubleClicked: {
++                if (flickable.scaled) {
++                    flickable._scale = flickable._fittedScale >= 1 ? 1.0 : flickable._fittedScale
++                    flickable.scaled = false
++                    flickable.contentX = 0
++                    flickable.contentY = 0
++                }
+             }
+         }
+     }
